@@ -1,0 +1,22 @@
+.price-pro{
+    margin-left: 25px;
+    text-decoration-line: line-through;
+}
+
+.card-size{
+    width: 210px;
+}
+
+.link_color{
+    color: white;
+}
+.decoration-line:hover{
+    color: rebeccapurple;
+    text-decoration-line: none;
+
+}
+
+i.position-absolute{
+    right: 5px;
+    top: 3px;
+}

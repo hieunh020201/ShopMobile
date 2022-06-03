@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: antiquewhite;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.div--form{
+    width: 400px;
+    border-radius: 10px;
+}
+
+.div--icon-dec{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border: 1px;
+}
+
+.size-circle{
+    width: 40px;
+    height: 40px;
+}
+
+.icon__child{
+    padding-top: 5px;
+}
