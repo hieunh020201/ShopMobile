@@ -52,3 +52,23 @@ i.position-absolute{
     right: 5px;
     top: 3px;
 }
+
+/* button */
+
+.btn{
+    font-size: 18px;
+}
+
+.sub-text{
+    font-size: 14px;
+}
+
+/* table */
+.td-quantity{
+    width: 50px;
+}
+
+/* radio custom */
+.div-custom{
+    height: 50px;
+}

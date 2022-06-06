@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <link rel="stylesheet" href="assets/css/styleHeaderUser.css">
 </head>
-<body class="container-xl">
+<body>
 <div class="row " style="background-color: aqua">
     <div class="col-xl-3">
         <a>
@@ -30,11 +30,10 @@
         </form>
     </div>
     <div class="pt-2">
-        <a>
+        <a href="/Signin_signup.jsp">
             <span>Đăng nhập</span>
         </a>
     </div>
 </div>
-<h1 class="text-success">Xin chào!</h1>
 </body>
 </html>
