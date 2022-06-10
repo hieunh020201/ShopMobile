@@ -72,3 +72,9 @@ i.position-absolute{
 .div-custom{
     height: 50px;
 }
+
+/* sidebar admin*/
+.div--sidebar{
+    background-color: red;
+    background-attachment: fixed;
+}

@@ -2,29 +2,29 @@ package com.webbanhang.pojo;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable {
+@Table(name = "tb_category", schema = "webdidong")
+public class Category{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    @Column(name = "cid", nullable = false)
+    private String cid;
+    @Column(name = "cname")
+    private String cname;
 
-    public int getId() {
-        return id;
+    public String getId() {
+        return cid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(String cid) {
+        this.cid = cid;
     }
 
     public String getName() {
-        return name;
+        return cname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String cname) {
+        this.cname = cname;
     }
 }
