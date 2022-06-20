@@ -33,7 +33,7 @@
     <title>Document</title>
 </head>
 <body>
-<div class="bg-success" style="height: 100vh; width: 200px">
+<div class="bg-success mw-100" style="height: 100vh;">
     <div class="text-center">
         <div>
             <a href="http://www.creative-tim.com" class="simple-text">

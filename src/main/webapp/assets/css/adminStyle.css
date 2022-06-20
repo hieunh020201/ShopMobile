@@ -1,0 +1,86 @@
+/* hover image */
+.div-effect-main{
+    overflow: hidden;
+    background:#000;
+}
+
+.div-effect-main:hover .img-product-main{
+    opacity: 0.5;
+}
+
+.div-effect-main:hover .plus-main{
+    opacity: 1;
+}
+
+.plus-main{
+    position: absolute;
+
+    top: 115px;
+    left: 95px;
+
+    z-index:1;
+    opacity:0;
+    transition: 0.5s;
+    color: #fff;
+    font-size: 100px;
+}
+
+.div-effect-1{
+    overflow: hidden;
+    background:#000;
+}
+
+.div-effect-1:hover .img-product-1{
+    opacity: 0.5;
+}
+
+.div-effect-1:hover .plus-1{
+    opacity: 1;
+}
+
+.div-effect-1:hover .plus-2{
+    opacity: 1;
+}
+
+.div-effect-1:hover .plus-3{
+    opacity: 1;
+}
+
+.plus-1{
+    position: absolute;
+
+    top: 307px;
+    left: 18px;
+
+    z-index:1;
+    opacity:0;
+    transition: 0.5s;
+    color: #fff;
+    font-size: 60px;
+}
+
+.plus-2{
+    position: absolute;
+
+    top: 307px;
+    left: 105px;
+
+    z-index:1;
+    opacity:0;
+    transition: 0.5s;
+    color: #fff;
+    font-size: 60px;
+}
+
+.plus-3{
+    position: absolute;
+
+    top: 307px;
+    left: 192px;
+
+    z-index:1;
+    opacity:0;
+    transition: 0.5s;
+    color: #fff;
+    font-size: 60px;
+}

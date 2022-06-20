@@ -28,15 +28,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
     <!-- style -->
-    <link rel="stylesheet" href="../assets/css/indexStyle.css">
+    <link rel="stylesheet" href="../assets/css/adminStyle.css">
 
 <%--    <script src="../assets/js/main.js"></script>--%>
     <title>Category Management</title>
 </head>
 <body>
 <div class="d-flex">
-    <div class="col-2 div--sidebar bg-dark d-flex justify-content-center" style="height: 100vh">
-        <div class="position-fixed">
+    <div class="col-2 p-0">
+        <div class="position-fixed col-2 p-0">
             <c:import url="/admin/SideBarAdmin.jsp"/>
         </div>
     </div>

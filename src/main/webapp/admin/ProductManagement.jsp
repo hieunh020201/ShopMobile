@@ -28,21 +28,27 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
     <!-- style -->
+    <link rel="stylesheet" href="../assets/css/adminStyle.css">
 
     <script src="../assets/js/main.js"></script>
     <title>Product Management</title>
 </head>
 <body>
 <div class="d-flex">
-    <div class="col-2">
-        <div class="position-fixed bg-dark">
+    <div class="col-2 p-0">
+        <div class="position-fixed col-2 p-0">
             <c:import url="/admin/SideBarAdmin.jsp"/>
         </div>
     </div>
-    <div class="col-10">
+    <div class="col-10 p-0">
+<%--        header --%>
+        <div style="height: 50px; background-color: bisque">
+
+        </div>
+<%--    content --%>
         <div class="d-flex">
             <!-- Table product -->
-            <div class="col-6 p-0">
+            <div class="col-6 pr-0">
                 <table class="table table-striped table-hover table-bordered">
                     <tr>
                         <th class="text-center col-1">No.</th>
@@ -52,7 +58,9 @@
                         <th class="text-center col-1">Promotion</th>
                     </tr>
 <c:forEach items="${products}" var="pro" varStatus="item">
-                    <tr onclick="setProduct('${pro.getId()}', '${pro.getName()}')">
+<%--    function setProduct(id, name, price, quantity, description, promotion, image)--%>
+                    <tr onclick="setProduct('${pro.getId()}', '${pro.getName()}', '${pro.getPrice()}', '${pro.getQuantity()}', '${pro.getDescription()}',
+                            '${pro.getPromotion()}', '${pro.getImage()}')">
                         <td class="text-center">${item.index + 1}</td>
                         <td class="text-center">
                             <span>
@@ -88,12 +96,23 @@
                 <div class="text-center">
                     <h1>DETAIL</h1>
                 </div>
-                <form action="ControlProduct" method="post">
+
                     <div class="d-flex">
                         <div class="col-7">
-                            <div class="form-group p-0">
-                                <label for="id">Mã: </label>
-                                <input type="text" class="form-control" value="" id="id" name="id" disabled>
+                            <form action="ControlProduct" method="post">
+                                <div class="input-group p-0 mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">ID</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="id" name="id" disabled>
+                                </div>
+                            <div class="form-group">
+                                <label for="category">Danh mục: </label>
+                                <select name="category" class="form-control" id="category">
+                                    <c:forEach items="${categories}" var="cate">
+                                        <option value="${cate.getId()}">${cate.getName()}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="name">Tên sản phẩm: </label>
@@ -111,32 +130,54 @@
                             </div>
                             <div class="form-group">
                                 <label for="description">Mô tả: </label>
-                                <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                <textarea class="form-control" rows="4" id="description" name="description"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="promotion">Khuyến mãi: </label>
                                 <input type="text" class="form-control" value="" id="promotion" name="promotion">
                             </div>
                             <div>
+                                <input type="hidden" class="form-control" value="" id="image" name="image">
                                 <input type="submit" class="btn btn-success btn-fill" name="action" value="CREATE">
                                 <input type="submit" class="btn btn-warning btn-fill" name="action" value="UPDATE">
+                                <input type="text" name="data" id="image_main">
+                                <input type="text" name="data" id="image_1">
+                                <input type="text" name="data" id="image_2">
+                                <input type="text" name="data" id="image_3">
                             </div>
+                            </form>
                         </div>
-                        <div class="col-5 p-0">
-                            <div class="form-group ml-2">
-                                <label for="category">Danh mục: </label>
-                                <select name="category" class="form-control" id="category">
-                                    <c:forEach items="${categories}" var="cate">
-                                        <option value="${cate.getId()}">${cate.getName()}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="card">
-                                <label for="myimg">Hình ảnh: </label>
+                        <div class="div-img col-5 p-0">
+
+                            <div class=" mt-5">
+                                <label for="imageShow">Hình ảnh: </label>
                                 <input type="hidden" name="" id="namebox" width="180px">
 
                                 <label id="extlab" style="display: none"></label><br>
-                                <img id="myimg" class="card-img-top" width="240px" height="240px">
+                                <div class="div-effect-main">
+                                    <img class="img-product-main w-100" src="../assets/images/image.jpg" id="imageShow" width="240px" height="240px">
+                                    <span class="plus-main" id="plus-main">+</span>
+                                </div>
+                                <div class="mt-1 d-flex justify-content-between">
+                                    <div class="mr-1">
+                                        <div class="div-effect-1">
+                                            <img class="w-100 img-product-1" src="../assets/images/image.jpg" id="img1" width="70px" height="70px">
+                                            <span class="plus-1" id="plus-1">+</span>
+                                        </div>
+                                    </div>
+                                    <div class="mr-1 ml-1">
+                                        <div class="div-effect-1">
+                                            <img class="w-100 img-product-1" src="../assets/images/image.jpg" id="img2" width="70px" height="70px">
+                                            <span class="plus-2" id="plus-2">+</span>
+                                        </div>
+                                    </div>
+                                    <div class="ml-1">
+                                        <div class="div-effect-1">
+                                            <img class="w-100 img-product-1" src="../assets/images/image.jpg" id="img3" width="70px" height="70px">
+                                            <span class="plus-3" id="plus-3">+</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style="margin-top: 10px">
                                     <button id="selbtn" class="btn btn-info btn-fill">Choose</button>
                                     <button id="upbtn" class="btn btn-info btn-fill">Save</button> <label id="upprogress"></label>
@@ -144,7 +185,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+
             </div>
         </div>
     </div>
@@ -201,7 +242,7 @@
         from "https://www.gstatic.com/firebasejs/9.8.3/firebase-storage.js";
 
     //Firebase Realtime Database
-    import { getDatabase, ref, set, child, get, update, remove }
+    import { getDatabase, ref, set, child, push, get, update, remove }
         from "https://www.gstatic.com/firebasejs/9.8.3/firebase-database.js";
 
     //Gọi database
@@ -214,14 +255,21 @@
 
     var namebox = document.getElementById('namebox');
     var extlab = document.getElementById('extlab');
-    var myimg = document.getElementById('myimg');
+    var image = document.getElementById('imageShow');
+    var image1 = document.getElementById('img1');
+    var image2 = document.getElementById('img2');
+    var image3 = document.getElementById('img3');
     var proglab = document.getElementById('upprogress');
-    var SelBtn = document.getElementById('selbtn');
+    // var SelBtn = document.getElementById('selbtn');
     var UpBtn = document.getElementById('upbtn');
-    var DownBtn = document.getElementById('downbtn');
-    var imagetext = document.getElementById('images');
+    // var imagetext = document.getElementById('images');
 
-    //Tạo element input type file
+    var plus = document.getElementById('plus-main');
+    var plus1 = document.getElementById('plus-1');
+    var plus2 = document.getElementById('plus-2');
+    var plus3 = document.getElementById('plus-3');
+
+    //Tạo element input type file----------------------
     var input = document.createElement('input');
     input.type = 'file';
 
@@ -229,6 +277,8 @@
     input.onchange = e =>{
         //Khai báo biến file được upload thành công
         files = e.target.files;
+        console.log("files[0] = " + files);
+
 
         var extention = GetFileExt(files[0]);
         var name = GetFileName(files[0]);
@@ -238,17 +288,59 @@
 
         reader.readAsDataURL(files[0]);
 
+        reader.onload = function(){
+            image.src = reader.result;
+        }
+
+        UploadProcess('image_main');
     }
 
-    reader.onload = function(){
-        myimg.src = reader.result;
+    //Main Image click
+    plus.onclick = function(){
+        input.click();
     }
+    //---------------------------------
+
+    var input1 = document.createElement('input');
+    input1.type = 'file';
+
+    //When input makes changes
+    input1.onchange = e =>{
+        //Khai báo biến file được upload thành công
+        files = e.target.files;
+        console.log("files[1] = " + files);
+
+
+        var extention = GetFileExt(files[0]);
+        var name = GetFileName(files[0]);
+
+        namebox.value = name;
+        extlab.innerHTML = extention;
+
+        reader.readAsDataURL(files[0]);
+
+        reader.onload = function(){
+            image1.src = reader.result;
+        }
+
+        UploadProcess('image_1');
+    }
+
+    //Image No.1 click
+    plus1.onclick = function(){
+        input1.click();
+    }
+
+    //------------------------------------------------
+
+
+
 
     // -----------SELECTION-----------------------------------------
 
-    SelBtn.onclick = function(){
-        input.click();
-    }
+
+
+
 
     //Lấy đuôi của file
     function GetFileExt(file) {
@@ -269,13 +361,12 @@
     }
 
     // -----------------UPLOAD PROCESS----------------------
-    async function UploadProcess() {
+    async function UploadProcess(id) {
         var ImgToUpload = files[0];
 
         var ImgName = namebox.value + extlab.innerHTML;
 
-        //MD5
-
+        console.log("get id 1: ", id);
 
         if(!ValidateName()){
             alert('name cannot contain ".", "#", "$", "[", or "]"');
@@ -303,35 +394,67 @@
 
             ()=>{
                 getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
-                    SaveURLtoRealtimeDB(downloadURL);
-                    GetUrlfromRealtimeDB();
+                    console.log("get id 2: ", id);
+                    SaveURLtoRealtimeDB(downloadURL, id);
+                    // GetUrlfromRealtimeDB();
                 });
             }
         );
+
     }
 
     // ----------Functions for REALTIME DATABASE ----------
 
-    function SaveURLtoRealtimeDB(URL) {
+
+
+    function SaveURLtoRealtimeDB(URL, id) {
+        //Chỉ để kiểm tra
+        let getKey;
+
         var name = namebox.value;
         var ext = extlab.innerHTML;
 
-        set(ref(realdb,"ImageLinks/"+name),{
-            ImageName: (name+ext),
+        push(ref(realdb,"ImageLinks/id"),{
+            // ImageName: (name+ext),
             ImgUrl: URL
+        }).then((snap) => {
+            getKey = snap.key
+            console.log("get key: ", getKey);
+            console.log("get id 3: ", id);
+            document.getElementById(id).value = getKey;
+
+            // imagetext.value = getKey;
+            GetUrlfromRealtimeDB(getKey);
         });
+
     }
 
-    function GetUrlfromRealtimeDB() {
+    function GetUrlfromRealtimeDB(getKey) {
         var name = namebox.value;
+        console.log("name: ", name);
 
         var dbRef = ref(realdb);
+        console.log(" real: ", dbRef);
 
-        get(child(dbRef, "ImageLinks/"+name)).then((snapshot)=>{
+        console.log("get key 2 ", getKey);
+
+
+        get(child(dbRef, "ImageLinks/id" + getKey)).then((snapshot)=>{
+            console.log("ben ngoai");
+            console.log(" hello + " + getKey)
+            // snapshot.forEach((childSnapshot) => {
+            //     console.log(childSnapshot.key);
+            //     console.log(childSnapshot.val())
+            //
+            // })
+            console.log(snapshot.val())
             if(snapshot.exists()){
-                myimg.src = snapshot.val().ImgUrl;
-                imagetext.value = snapshot.val().ImgUrl;
+                image.src = snapshot.val().ImgUrl;
+                // imagetext.value = snapshot.val().ImgUrl;
+                // console.log("xin chao: ", snapshot.val());
             }
+
+            // console.log(snapshot.val().ImgUrl);
         })
     }
 
@@ -340,6 +463,7 @@
         return !(regex.test(namebox.value));
     }
 
-    UpBtn.onclick = UploadProcess;
-    DownBtn.onclick = GetUrlfromRealtimeDB;
+     // UpBtn.onclick = UploadProcess;
+    // DownBtn.onclick = GetUrlfromRealtimeDB;
+
 </script>
