@@ -72,7 +72,7 @@
             <div class="col-5">
                 <div>
                     <h1>Category</h1>
-                    <form action="ControlCategory" method="post">
+                    <form action="controlCategory" method="post">
                     <div class="form-group ml-1">
                         <label for="id">id: </label>
                         <input type="text" class="form-control" maxlength="6" id="id" name="id">

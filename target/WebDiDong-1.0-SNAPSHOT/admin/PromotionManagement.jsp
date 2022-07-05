@@ -49,56 +49,40 @@
                         <th class="text-center col-1">Id</th>
                         <th class="text-center col-5">Sale</th>
                     </tr>
-                    <tr>
-                        <td class="text-center">1</td>
+<c:forEach items="${promotions}" var="pro" varStatus="item">
+                    <tr onclick="setPromotion('${pro.getId()}', '${pro.getSale()}')">
+                        <td class="text-center">${item.index + 1}</td>
                         <td class="text-center">
-                    <span>
-                        #1234
-                    </span>
+                            <span>${pro.getId()}</span>
                         </td>
                         <td class="text-center">
-                    <span>
-                        name
-                    </span>
+                            <span>${pro.getSale()}</span>
                         </td>
                         <td class="text-center">
-                            <i class="far fa-trash-alt text-danger"></i>
+                            <i class="far fa-trash-alt text-danger" onclick="messDelPromotion('${pro.getId()}')"></i>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">
-                    <span>
-                        #1234
-                    </span>
-                        </td>
-                        <td class="text-center">
-                    <span>
-                        name
-                    </span>
-                        </td>
-                        <td class="text-center col-1">
-                            <i class="far fa-trash-alt text-danger"></i>
-                        </td>
-                    </tr>
+</c:forEach>
                 </table>
             </div>
             <div class="col-5">
-                <div>
-                    <h1>Promotion</h1>
-                    <div class="form-group ml-1">
-                        <label for="id">id: </label>
-                        <input type="text" class="form-control" id="id">
-                    </div>
-                    <div class="form-group ml-1">
-                        <label for="name">Sale: </label>
-                        <input type="text" class="form-control" id="name">
-                    </div>
+                <form action="controlPromotion" method="post">
                     <div>
-                        <input type="submit" class="btn btn-success btn-fill" name="action" value="CREATE">
-                        <input type="submit" class="btn btn-warning btn-fill" name="action" value="UPDATE">
+                        <h1>Promotion</h1>
+                        <div class="form-group ml-1">
+                            <label for="id">id: </label>
+                            <input type="text" class="form-control" id="id" name="id">
+                        </div>
+                        <div class="form-group ml-1">
+                            <label for="sale">Sale: </label>
+                            <input type="text" class="form-control" id="sale" name="sale">
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-success btn-fill" name="action" value="CREATE">
+                            <input type="submit" class="btn btn-warning btn-fill" name="action" value="UPDATE">
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -106,3 +90,19 @@
 
 </body>
 </html>
+
+<script>
+    function messDelPromotion(pid) {
+        const option = confirm('Are you sure to delete');
+        if (option === true) {
+            window.location.href = 'deletePromotion?id=' + pid;
+        }
+    }
+</script>
+
+<script>
+    function setPromotion(id, sale) {
+        document.getElementById("id").value = id;
+        document.getElementById("sale").value = sale;
+    }
+</script>

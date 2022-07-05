@@ -59,8 +59,11 @@
                     </tr>
 <c:forEach items="${products}" var="pro" varStatus="item">
 <%--    function setProduct(id, name, price, quantity, description, promotion, image)--%>
-                    <tr onclick="setProduct('${pro.getId()}', '${pro.getName()}', '${pro.getPrice()}', '${pro.getQuantity()}', '${pro.getDescription()}',
-                            '${pro.getPromotion()}', '${pro.getImage()}')">
+                    <tr onclick="setProduct('${pro.getId()}', '${pro.getName()}', '${pro.getPrice()}', '${pro.getQuantity()}',
+                            '${pro.getDescription()}', '${pro.getPromotion().getId()}', '${pro.getImage().getId()}','${pro.getImage().getMain_image().getId()}',
+                            '${pro.getImage().getSupport_image_1().getId()}', '${pro.getImage().getSupport_image_2().getId()}', '${pro.getImage().getSupport_image_3().getId()}',
+                            '${pro.getImage().getMain_image().getUrl_image()}', '${pro.getImage().getSupport_image_1().getUrl_image()}',
+                            '${pro.getImage().getSupport_image_2().getUrl_image()}', '${pro.getImage().getSupport_image_3().getUrl_image()}')">
                         <td class="text-center">${item.index + 1}</td>
                         <td class="text-center">
                             <span>
@@ -96,16 +99,15 @@
                 <div class="text-center">
                     <h1>DETAIL</h1>
                 </div>
-
-                    <div class="d-flex">
-                        <div class="col-7">
-                            <form action="ControlProduct" method="post">
-                                <div class="input-group p-0 mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">ID</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="id" name="id" disabled>
+                <div class="d-flex">
+                    <div class="col-7">
+                        <form action="controlProduct" method="post">
+                            <div class="input-group p-0 mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">ID</span>
                                 </div>
+                                <input type="text" class="form-control" id="id" name="id" disabled>
+                            </div>
                             <div class="form-group">
                                 <label for="category">Danh mục: </label>
                                 <select name="category" class="form-control" id="category">
@@ -121,11 +123,11 @@
                             <div class="d-flex">
                                 <div class="form-group">
                                     <label for="price">Giá: </label>
-                                    <input type="number" class="form-control input-price" min="0" value="" id="price" name="price">
+                                    <input type="number" class="form-control input-price" min="0" value="" id="price" name="price" required>
                                 </div>
                                 <div class="form-group ml-1">
                                     <label for="quantity">Số lượng: </label>
-                                    <input type="number" class="form-control" min="0" value="" id="quantity" name="quantity">
+                                    <input type="number" class="form-control" min="0" value="" id="quantity" name="quantity" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -137,55 +139,56 @@
                                 <input type="text" class="form-control" value="" id="promotion" name="promotion">
                             </div>
                             <div>
-                                <input type="hidden" class="form-control" value="" id="image" name="image">
                                 <input type="submit" class="btn btn-success btn-fill" name="action" value="CREATE">
                                 <input type="submit" class="btn btn-warning btn-fill" name="action" value="UPDATE">
-                                <input type="text" name="data" id="image_main">
-                                <input type="text" name="data" id="image_1">
-                                <input type="text" name="data" id="image_2">
-                                <input type="text" name="data" id="image_3">
+                                <input type="text" name="id_image" id="id_image">
+                                <input type="text" name="image_main" id="image_main" value="1">
+                                <input type="text" name="image_1" id="image_1" value="1">
+                                <input type="text" name="image_2" id="image_2" value="1">
+                                <input type="text" name="image_3" id="image_3" value="1">
+                                <input type="text" name="url_image_main" id="url_image_main" value="../assets/images/image.jpg">
+                                <input type="text" name="url_image_1" id="url_image_1" value="../assets/images/image.jpg">
+                                <input type="text" name="url_image_2" id="url_image_2" value="../assets/images/image.jpg">
+                                <input type="text" name="url_image_3" id="url_image_3" value="../assets/images/image.jpg">
                             </div>
-                            </form>
-                        </div>
-                        <div class="div-img col-5 p-0">
+                        </form>
+                    </div>
+                    <div class="div-img col-5 p-0">
+                        <div class=" mt-5">
+                            <label for="imageShow">Hình ảnh: </label>
+                            <input type="hidden" name="" id="namebox">
 
-                            <div class=" mt-5">
-                                <label for="imageShow">Hình ảnh: </label>
-                                <input type="hidden" name="" id="namebox" width="180px">
-
-                                <label id="extlab" style="display: none"></label><br>
-                                <div class="div-effect-main">
-                                    <img class="img-product-main w-100" src="../assets/images/image.jpg" id="imageShow" width="240px" height="240px">
-                                    <span class="plus-main" id="plus-main">+</span>
-                                </div>
-                                <div class="mt-1 d-flex justify-content-between">
-                                    <div class="mr-1">
-                                        <div class="div-effect-1">
-                                            <img class="w-100 img-product-1" src="../assets/images/image.jpg" id="img1" width="70px" height="70px">
-                                            <span class="plus-1" id="plus-1">+</span>
-                                        </div>
-                                    </div>
-                                    <div class="mr-1 ml-1">
-                                        <div class="div-effect-1">
-                                            <img class="w-100 img-product-1" src="../assets/images/image.jpg" id="img2" width="70px" height="70px">
-                                            <span class="plus-2" id="plus-2">+</span>
-                                        </div>
-                                    </div>
-                                    <div class="ml-1">
-                                        <div class="div-effect-1">
-                                            <img class="w-100 img-product-1" src="../assets/images/image.jpg" id="img3" width="70px" height="70px">
-                                            <span class="plus-3" id="plus-3">+</span>
-                                        </div>
+                            <label id="extlab" style="display: none"></label><br>
+                            <div class="div-effect-main">
+                                <img class="img-product-main w-100" src="../assets/images/image.jpg" id="imageShow" width="240px" height="240px">
+                                <span class="plus-main" id="plus-main">+</span>
+                            </div>
+                            <div class="mt-1 d-flex justify-content-between">
+                                <div class="mr-1">
+                                    <div class="div-effect-1">
+                                        <img class="img-product-1" src="../assets/images/image.jpg" id="img1" width="70px" height="70px">
+                                        <span class="plus-1" id="plus-1">+</span>
                                     </div>
                                 </div>
-                                <div style="margin-top: 10px">
-                                    <button id="selbtn" class="btn btn-info btn-fill">Choose</button>
-                                    <button id="upbtn" class="btn btn-info btn-fill">Save</button> <label id="upprogress"></label>
+                                <div class="mr-1 ml-1">
+                                    <div class="div-effect-1">
+                                        <img class="img-product-1" src="../assets/images/image.jpg" id="img2" width="70px" height="70px">
+                                        <span class="plus-2" id="plus-2">+</span>
+                                    </div>
                                 </div>
+                                <div class="ml-1">
+                                    <div class="div-effect-1">
+                                        <img class="img-product-1" src="../assets/images/image.jpg" id="img3" width="70px" height="70px">
+                                        <span class="plus-3" id="plus-3">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px">
+                                <label id="upprogress"></label>
                             </div>
                         </div>
                     </div>
-
+                </div>
             </div>
         </div>
     </div>
@@ -194,20 +197,34 @@
 </html>
 
 <script>
-    function setProduct(id, name, price, quantity, description, promotion, image) {
+    function setProduct(id, name, price, quantity, description, promotion, id_image,
+                        main_image, support_image_1, support_image_2, support_image_3,
+                        url_main_image, url_support_image_1, url_support_image_2, url_support_image_3) {
         document.getElementById("id").value = id;
         document.getElementById("name").value = name;
         document.getElementById("price").value = price;
         document.getElementById("quantity").value = quantity;
         document.getElementById("description").value = description;
         document.getElementById("promotion").value = promotion;
-        document.getElementById("image").value = image;
+        document.getElementById("id_image").value = id_image;
+        document.getElementById("image_main").value = main_image;
+        document.getElementById("image_1").value = support_image_1;
+        document.getElementById("image_2").value = support_image_2;
+        document.getElementById("image_3").value = support_image_3;
+        document.getElementById("url_image_main").value = url_main_image;
+        document.getElementById("url_image_1").value = url_support_image_1;
+        document.getElementById("url_image_2").value = url_support_image_2;
+        document.getElementById("url_image_3").value = url_support_image_3;
+        document.getElementById("imageShow").src = url_main_image;
+        document.getElementById("img1").src = url_support_image_1;
+        document.getElementById("img2").src = url_support_image_2;
+        document.getElementById("img3").src = url_support_image_3;
     }
 </script>
 
 <script>
     function messDelProduct(pid) {
-        var option = confirm('Are you sure to delete');
+        const option = confirm('Are you sure to delete');
         if (option === true) {
             window.location.href = 'deleteProduct?id=' + pid;
         }
@@ -260,8 +277,6 @@
     var image2 = document.getElementById('img2');
     var image3 = document.getElementById('img3');
     var proglab = document.getElementById('upprogress');
-    // var SelBtn = document.getElementById('selbtn');
-    var UpBtn = document.getElementById('upbtn');
     // var imagetext = document.getElementById('images');
 
     var plus = document.getElementById('plus-main');
@@ -292,13 +307,14 @@
             image.src = reader.result;
         }
 
-        UploadProcess('image_main');
+        UploadProcess('image_main', image, 'url_image_main');
     }
 
     //Main Image click
     plus.onclick = function(){
         input.click();
     }
+
     //---------------------------------
 
     var input1 = document.createElement('input');
@@ -323,7 +339,7 @@
             image1.src = reader.result;
         }
 
-        UploadProcess('image_1');
+        UploadProcess('image_1', image1, 'url_image_1');
     }
 
     //Image No.1 click
@@ -333,14 +349,69 @@
 
     //------------------------------------------------
 
+    var input2 = document.createElement('input');
+    input2.type = 'file';
 
+    //When input makes changes
+    input2.onchange = e =>{
+        //Khai báo biến file được upload thành công
+        files = e.target.files;
+        console.log("files[2] = " + files);
+
+
+        var extention = GetFileExt(files[0]);
+        var name = GetFileName(files[0]);
+
+        namebox.value = name;
+        extlab.innerHTML = extention;
+
+        reader.readAsDataURL(files[0]);
+
+        reader.onload = function(){
+            image2.src = reader.result;
+        }
+
+        UploadProcess('image_2', image2, 'url_image_2');
+    }
+
+    //Image No.2 click
+    plus2.onclick = function(){
+        input2.click();
+    }
+
+    //------------------------------------------------
+
+    var input3 = document.createElement('input');
+    input3.type = 'file';
+
+    //When input makes changes
+    input3.onchange = e =>{
+        //Khai báo biến file được upload thành công
+        files = e.target.files;
+        var extention = GetFileExt(files[0]);
+        var name = GetFileName(files[0]);
+
+        namebox.value = name;
+        extlab.innerHTML = extention;
+
+        reader.readAsDataURL(files[0]);
+
+        reader.onload = function(){
+            image3.src = reader.result;
+        }
+
+        UploadProcess('image_3', image3, 'url_image_3');
+    }
+
+    //Image No.3 click
+    plus3.onclick = function(){
+        input3.click();
+    }
+
+    //------------------------------------------------
 
 
     // -----------SELECTION-----------------------------------------
-
-
-
-
 
     //Lấy đuôi của file
     function GetFileExt(file) {
@@ -361,7 +432,7 @@
     }
 
     // -----------------UPLOAD PROCESS----------------------
-    async function UploadProcess(id) {
+    async function UploadProcess(id, imgShow, url_img) {
         var ImgToUpload = files[0];
 
         var ImgName = namebox.value + extlab.innerHTML;
@@ -385,7 +456,7 @@
 
         UploadTask.on('state-changed', (snapshot)=>{
                 var progess = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                proglab.innerHTML = "Upload" + progess + "%";
+                proglab.innerHTML = "Upload " + progess + "%";
             },
 
             (error) =>{
@@ -394,9 +465,21 @@
 
             ()=>{
                 getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
-                    console.log("get id 2: ", id);
-                    SaveURLtoRealtimeDB(downloadURL, id);
-                    // GetUrlfromRealtimeDB();
+                    var str = document.getElementById("image_main").value;
+                    console.log("str " + str);
+                    if(str != "1") {
+                        console.log("str " + str);
+
+                        if(document.getElementById(id).value.length>1) {
+                            console.log("update ");
+                            UpdateURLtoRealtimeDB(downloadURL, document.getElementById(id).value, imgShow, url_img);
+                        } else {
+                            console.log("save");
+                            SaveURLtoRealtimeDB(downloadURL, id, imgShow, url_img);
+                        }
+                    } else {
+                        SaveURLtoRealtimeDB(downloadURL, id, imgShow, url_img);
+                    }
                 });
             }
         );
@@ -405,56 +488,38 @@
 
     // ----------Functions for REALTIME DATABASE ----------
 
+    function UpdateURLtoRealtimeDB(URL, id, imgShow, url_img){
+        update(ref(realdb,"ImageLinks/id/"+id),{
+            ImgUrl: URL
+        }).then((snap) => {
+
+            GetUrlfromRealtimeDB(id, imgShow, url_img);
+        });
+    }
 
 
-    function SaveURLtoRealtimeDB(URL, id) {
-        //Chỉ để kiểm tra
+    function SaveURLtoRealtimeDB(URL, id, imgShow, url_img) {
         let getKey;
 
-        var name = namebox.value;
-        var ext = extlab.innerHTML;
-
         push(ref(realdb,"ImageLinks/id"),{
-            // ImageName: (name+ext),
             ImgUrl: URL
         }).then((snap) => {
             getKey = snap.key
-            console.log("get key: ", getKey);
-            console.log("get id 3: ", id);
             document.getElementById(id).value = getKey;
-
-            // imagetext.value = getKey;
-            GetUrlfromRealtimeDB(getKey);
+            GetUrlfromRealtimeDB(getKey, imgShow, url_img);
         });
 
     }
 
-    function GetUrlfromRealtimeDB(getKey) {
-        var name = namebox.value;
-        console.log("name: ", name);
+    function GetUrlfromRealtimeDB(getKey, imgShow, url_img) {
 
-        var dbRef = ref(realdb);
-        console.log(" real: ", dbRef);
-
-        console.log("get key 2 ", getKey);
-
-
-        get(child(dbRef, "ImageLinks/id" + getKey)).then((snapshot)=>{
-            console.log("ben ngoai");
-            console.log(" hello + " + getKey)
-            // snapshot.forEach((childSnapshot) => {
-            //     console.log(childSnapshot.key);
-            //     console.log(childSnapshot.val())
-            //
-            // })
-            console.log(snapshot.val())
+        const dbRef = ref(realdb);
+        get(child(dbRef, "ImageLinks/id/" + getKey)).then((snapshot)=>{
             if(snapshot.exists()){
-                image.src = snapshot.val().ImgUrl;
-                // imagetext.value = snapshot.val().ImgUrl;
-                // console.log("xin chao: ", snapshot.val());
+                imgShow.src = snapshot.val().ImgUrl;
+                document.getElementById(url_img).value = snapshot.val().ImgUrl;
+                console.log("url xuat: " + snapshot.val().ImgUrl);
             }
-
-            // console.log(snapshot.val().ImgUrl);
         })
     }
 
@@ -463,7 +528,5 @@
         return !(regex.test(namebox.value));
     }
 
-     // UpBtn.onclick = UploadProcess;
-    // DownBtn.onclick = GetUrlfromRealtimeDB;
-
 </script>
+

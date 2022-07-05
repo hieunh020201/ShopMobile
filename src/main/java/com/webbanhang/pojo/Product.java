@@ -11,7 +11,7 @@ public class Product {
     private String description;
     private double price;
     private int quantity;
-    private String image;
+
 
     @ManyToOne
     @JoinColumn(name = "id_category")
@@ -20,6 +20,18 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "id_promotion")
     private Promotion promotion;
+
+    @OneToOne
+    @JoinColumn(name = "image")
+    private Image_Product image;
+
+    public Image_Product getImage() {
+        return image;
+    }
+
+    public void setImage(Image_Product image) {
+        this.image = image;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -75,13 +87,5 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }

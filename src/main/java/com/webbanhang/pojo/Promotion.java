@@ -1,9 +1,8 @@
 package com.webbanhang.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_promotion", schema = "webdidong")
@@ -14,6 +13,9 @@ public class Promotion {
 
     @Column(name = "sale")
     private String sale;
+
+//    @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL)
+//    private Set<Product> products = new HashSet<>();
 
     public String getId() {
         return id;

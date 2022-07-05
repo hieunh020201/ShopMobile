@@ -1,8 +1,12 @@
 package com.webbanhang.controller;
 
 import com.webbanhang.DAO.CategoryDAO;
+import com.webbanhang.DAO.ImageDAO;
 import com.webbanhang.DAO.ProductDAO;
+import com.webbanhang.DAO.PromotionDAO;
 import com.webbanhang.pojo.Category;
+import com.webbanhang.pojo.Image;
+import com.webbanhang.pojo.Image_Product;
 import com.webbanhang.pojo.Product;
 
 import javax.servlet.RequestDispatcher;
@@ -27,7 +31,11 @@ public class ReadProduct extends HttpServlet {
 //        Call List Product
         ProductDAO pDao = new ProductDAO();
         List<Product> products = pDao.getListProduct();
+        if (products.isEmpty()) {
+            System.out.println("products is null");
+        }
         req.setAttribute("products", products);
+
 
 //        Call List Category
         CategoryDAO cDao = new CategoryDAO();

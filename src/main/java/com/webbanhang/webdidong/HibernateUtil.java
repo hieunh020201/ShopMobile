@@ -1,8 +1,6 @@
 package com.webbanhang.webdidong;
 
-import com.webbanhang.pojo.Category;
-import com.webbanhang.pojo.Product;
-import com.webbanhang.pojo.Promotion;
+import com.webbanhang.pojo.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -28,6 +26,8 @@ public class HibernateUtil {
         conf.addAnnotatedClass(Category.class);
         conf.addAnnotatedClass(Product.class);
         conf.addAnnotatedClass(Promotion.class);
+        conf.addAnnotatedClass(Image_Product.class);
+        conf.addAnnotatedClass(Image.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory();
     }

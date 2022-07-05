@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.criteria.*;
+import java.util.List;
 
 public class PromotionDAO {
     private final static SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -63,6 +64,23 @@ public class PromotionDAO {
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+        }
+    }
+
+//    Get List Promotion
+    public List<Promotion> getListPromotion(){
+        Session session = factory.openSession();
+        try{
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Promotion> query = builder.createQuery(Promotion.class);
+            Root<Promotion> root = query.from(Promotion.class);
+
+            query.select(root);
+
+            return session.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
